@@ -28,7 +28,7 @@ final class MaintenanceKitTests: XCTestCase {
         "minimum_version": "1.0.0",
         "minimum_build_number": 21,
         "store_url": "http://upte.ch",
-        "requires_update": false,
+        "required_update": false,
         "message": null
     }
     """
@@ -38,7 +38,6 @@ final class MaintenanceKitTests: XCTestCase {
         decoder.dateDecodingStrategy = .iso8601
         return decoder
     }()
-    
     
     func testMessageDecoding() throws {
         guard let data = self.messageString.data(using: .utf8) else {
@@ -74,7 +73,7 @@ final class MaintenanceKitTests: XCTestCase {
         XCTAssertEqual(model.minimumVersion, Version(major: 1, minor: 0, patch: 0))
         XCTAssertEqual(model.minimumBuild, 21)
         XCTAssertEqual(model.store, URL(string: "http://upte.ch"))
-        XCTAssertEqual(model.requiresUpdate, false)
+        XCTAssertEqual(model.isRequired, false)
         XCTAssertEqual(model.message, nil)
     }
     
