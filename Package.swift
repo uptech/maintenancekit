@@ -7,7 +7,7 @@ let package = Package(
     name: "MaintenanceKit",
     platforms: [
         .macOS(.v10_14),
-        .iOS(.v12)
+        .iOS(.v11)
     ],
     products: [
         .library(name: "MaintenanceKit", targets: ["MaintenanceKit"]),
