@@ -14,6 +14,7 @@ public enum MaintenanceError: Error, LocalizedError {
     case failure
     case other(String)
     
+    case missingMaintenance
     case missingPlatform
     
     public var localizedDescription: String {
@@ -24,6 +25,7 @@ public enum MaintenanceError: Error, LocalizedError {
         case .failure: return "Something went wrong trying to fetch the maintenance file. Please veryify it's uploaded correctly and try again."
         case .other(let message): return message
             
+        case .missingMaintenance: return "Missing Maintenance info. This error can be ignored if you are not using the maintenance functionality."
         case .missingPlatform: return "Missing iOS Platform. This error can be ignored if you are ommitting platforms when there isn't an upgrade."
         }
     }

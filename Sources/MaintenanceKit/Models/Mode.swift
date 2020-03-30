@@ -9,5 +9,5 @@ import Foundation
 
 public struct Mode: Codable {
     public let upgrade: Upgrade?
-    public let maintenance: Maintenance
+    public let maintenance: Maintenance?
 }

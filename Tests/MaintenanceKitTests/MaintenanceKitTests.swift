@@ -93,9 +93,9 @@ final class MaintenanceKitTests: XCTestCase {
         }
         let model = try self.decoder.decode(Mode.self, from: data)
         XCTAssertEqual(model.upgrade?.platforms.count, 1)
-        XCTAssertEqual(model.maintenance.isActive, true)
-        XCTAssertEqual(model.maintenance.message?.title, "Title")
-        XCTAssertEqual(model.maintenance.message?.body, "Body")
+        XCTAssertEqual(model.maintenance?.isActive, true)
+        XCTAssertEqual(model.maintenance?.message?.title, "Title")
+        XCTAssertEqual(model.maintenance?.message?.body, "Body")
     }
 
     static var allTests = [

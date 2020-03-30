@@ -70,8 +70,14 @@ public struct MaintenanceService {
         request.httpMethod = "GET"
         self.fetchMaintenanceInfo(for: request) { result in
             switch result {
-            case .success(let value): completion(.success(value.maintenance))
-            case .failure(let error): completion(.failure(error))
+            case .success(let value):
+                guard let maintenance = value.maintenance else {
+                    completion(.failure(MaintenanceError.missingMaintenance))
+                    return
+                }
+                completion(.success(maintenance))
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
     }
