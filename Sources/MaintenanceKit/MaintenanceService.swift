@@ -14,6 +14,8 @@ public struct MaintenanceService {
         return decoder
     }()
     
+    public init() { }
+    
     /// Fetch the JSON Data
     private func fetchMaintenanceInfo(for request: URLRequest, completion: @escaping (Result<Mode, Error>) -> Void) {
         let session = URLSession(configuration: .ephemeral)
