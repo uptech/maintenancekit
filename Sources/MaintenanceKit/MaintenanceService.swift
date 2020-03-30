@@ -55,7 +55,7 @@ public struct MaintenanceService {
     }
     
     /// Fetches the full maintenance info
-    public func checkMaintenance(for app: MaintenanceServiceProtocol, completion: @escaping (Result<Mode, Error>) -> Void) {
+    public func fetchMaintenance(for app: MaintenanceServiceProtocol, completion: @escaping (Result<Mode, Error>) -> Void) {
         var request = URLRequest(url: app.maintenanceURL)
         request.httpMethod = "GET"
         self.fetchMaintenanceInfo(for: request) { result in
@@ -67,7 +67,7 @@ public struct MaintenanceService {
     }
     
     /// Fetches the maintenance info
-    public func fetchMaintenance(for app: MaintenanceServiceProtocol, completion: @escaping (Result<Maintenance, Error>) -> Void) {
+    public func checkMaintenance(for app: MaintenanceServiceProtocol, completion: @escaping (Result<Maintenance, Error>) -> Void) {
         var request = URLRequest(url: app.maintenanceURL)
         request.httpMethod = "GET"
         self.fetchMaintenanceInfo(for: request) { result in
