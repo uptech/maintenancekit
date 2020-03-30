@@ -89,7 +89,7 @@ public struct MaintenanceService {
         self.fetchMaintenanceInfo(for: request) { result in
             switch result {
             case .success(let value):
-                guard let platform = value.upgrade?.platforms.first(where: { $0.type == .iOS }) else {
+                guard let platform = value.upgrade?.platforms.first(where: { $0.type == app.platform }) else {
                     completion(.failure(MaintenanceError.missingPlatform))
                     return
                 }

@@ -19,12 +19,7 @@ public struct Platform: Codable {
         case message = "message"
     }
     
-    public enum `Type`: String, Codable {
-        case iOS = "ios"
-        case android = "android"
-    }
-    
-    public let type: Type
+    public let type: PlatformType
     public let latestVersion: Version
     public let latestBuild: Int
     public let minimumVersion: Version
@@ -35,7 +30,7 @@ public struct Platform: Codable {
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.type = try container.decode(Type.self, forKey: .type)
+        self.type = try container.decode(PlatformType.self, forKey: .type)
         self.latestVersion = try Version(from: container.decode(String.self, forKey: .latestVersion))
         self.latestBuild = try container.decode(Int.self, forKey: .latestBuild)
         self.minimumVersion = try Version(from: container.decode(String.self, forKey: .minimumVersion))

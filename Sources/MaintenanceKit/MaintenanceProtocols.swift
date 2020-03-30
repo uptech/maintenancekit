@@ -24,6 +24,9 @@ public protocol UpgradeProtocol {
     /// The Current Version (Build) of the app. CFBundleVersion
     var currentBuild: Int { get }
     
+    /// The platform to check for updates on
+    var platform: PlatformType { get }
+    
     /// The method to check the version by. Either with the version string
     /// or the build number. iOS can use either, but it's best to use the
     /// the build for macOS.
