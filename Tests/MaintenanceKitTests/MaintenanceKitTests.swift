@@ -29,6 +29,7 @@ final class MaintenanceKitTests: XCTestCase {
         "minimum_build_number": 21,
         "store_url": "http://upte.ch",
         "required_update": false,
+        "show_version_info": false,
         "message": null
     }
     """
@@ -74,6 +75,7 @@ final class MaintenanceKitTests: XCTestCase {
         XCTAssertEqual(model.minimumBuild, 21)
         XCTAssertEqual(model.store, URL(string: "http://upte.ch"))
         XCTAssertEqual(model.isRequired, false)
+        XCTAssertEqual(model.showVersionInfo, false)
         XCTAssertEqual(model.message, nil)
     }
     

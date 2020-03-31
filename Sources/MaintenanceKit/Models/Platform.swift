@@ -16,6 +16,7 @@ public struct Platform: Codable {
         case minimumBuild = "minimum_build_number"
         case store = "store_url"
         case isRequired = "required_update"
+        case showVersionInfo = "show_version_info"
         case message = "message"
     }
     
@@ -26,6 +27,7 @@ public struct Platform: Codable {
     public let minimumBuild: Int
     public let store: URL
     public let isRequired: Bool
+    public let showVersionInfo: Bool
     public let message: Message?
     
     public init(from decoder: Decoder) throws {
@@ -37,6 +39,7 @@ public struct Platform: Codable {
         self.minimumBuild = try container.decode(Int.self, forKey: .minimumBuild)
         self.store = try container.decode(URL.self, forKey: .store)
         self.isRequired = try container.decode(Bool.self, forKey: .isRequired)
+        self.showVersionInfo = try container.decode(Bool.self, forKey: .showVersionInfo)
         self.message = try container.decodeIfPresent(Message.self, forKey: .message)
     }
     
@@ -49,6 +52,7 @@ public struct Platform: Codable {
         try container.encode(self.minimumBuild, forKey: .minimumBuild)
         try container.encode(self.store, forKey: .store)
         try container.encode(self.isRequired, forKey: .isRequired)
+        try container.encode(self.showVersionInfo, forKey: .showVersionInfo)
         try container.encode(self.message, forKey: .message)
     }
 }
