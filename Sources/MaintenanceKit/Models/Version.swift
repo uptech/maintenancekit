@@ -62,9 +62,7 @@ extension Version: Equatable, Comparable {
     }
     
     public static func < (lhs: Version, rhs: Version) -> Bool {
-        return lhs.major < rhs.major &&
-            lhs.minor < rhs.minor &&
-            lhs.patch < rhs.patch
+        return lhs.string.compare(rhs.string, options: .numeric) == .orderedAscending
     }
     
     public static func <= (lhs: Version, rhs: Version) -> Bool {
@@ -74,9 +72,7 @@ extension Version: Equatable, Comparable {
     }
     
     public static func > (lhs: Version, rhs: Version) -> Bool {
-        return lhs.major > rhs.major &&
-            lhs.minor > rhs.minor &&
-            lhs.patch > rhs.patch
+        return lhs.string.compare(rhs.string, options: .numeric) == .orderedDescending
     }
     
     public static func >= (lhs: Version, rhs: Version) -> Bool {

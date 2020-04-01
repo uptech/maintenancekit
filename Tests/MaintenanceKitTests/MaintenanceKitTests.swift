@@ -99,11 +99,25 @@ final class MaintenanceKitTests: XCTestCase {
         XCTAssertEqual(model.maintenance?.message?.title, "Title")
         XCTAssertEqual(model.maintenance?.message?.body, "Body")
     }
+    
+    func testVersionChecking() {
+        let version1 = Version(from: "2.3.4")
+        let version2 = Version(from: "2.3.3")
+        
+        XCTAssertNotEqual(version1, version2)
+        
+        XCTAssertGreaterThan(version1, version2)
+        XCTAssertGreaterThanOrEqual(version1, version2)
+        
+        XCTAssertLessThan(version2, version1)
+        XCTAssertLessThanOrEqual(version2, version1)
+    }
 
     static var allTests = [
         ("testMessageDecoding", testMessageDecoding),
         ("testMaintenanceDecoding", testMaintenanceDecoding),
         ("testPlatformDecoding", testPlatformDecoding),
-        ("testModeDecoding", testModeDecoding)
+        ("testModeDecoding", testModeDecoding),
+        ("testVersionChecking", testVersionChecking)
     ]
 }
