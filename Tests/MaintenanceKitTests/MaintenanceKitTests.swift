@@ -111,6 +111,11 @@ final class MaintenanceKitTests: XCTestCase {
         
         XCTAssertLessThan(version2, version1)
         XCTAssertLessThanOrEqual(version2, version1)
+        
+        let latestVersion = Version(from: "5.7.3")
+        let currentVersion = Version(from: "5.7.3")
+        XCTAssertEqual(latestVersion, currentVersion)
+        XCTAssertFalse(latestVersion > currentVersion)
     }
 
     static var allTests = [
