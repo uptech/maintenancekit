@@ -14,6 +14,9 @@ public enum VersionCheckMethod {
     
     /// The Build Number (CFBundleVersion) of the app
     case build
+    
+    /// Support checking both the version and build number
+    case both
 }
 
 /// Upgrade Check Protocol

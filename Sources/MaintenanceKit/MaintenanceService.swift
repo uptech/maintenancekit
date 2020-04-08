@@ -131,6 +131,26 @@ public struct MaintenanceService {
                     }
                     // No Update needed
                     completion(.success(.init(updateAvailable: false, isOlderThanMinimumVersion: false, details: platform)))
+                    
+                case .both:
+                    /// **Version & Build Check**
+                    /// Check if we have an update available. We use the current version against the latest version.
+                    /// We also check if the minimum version and build is newer than the current version and build.
+                    /// If it is, we are using a version that is super outdated and being sunset, meaning it's
+                    /// dead and no longer supported.
+                    let currentVersion = Version(from: app.currentVersion)
+                    
+                    if platform.latestVersion > currentVersion && platform.latestBuild > app.currentBuild {
+                        // We need to update
+                        completion(.success(.init(
+                            updateAvailable: true,
+                            isOlderThanMinimumVersion: platform.latestVersion > currentVersion && platform.minimumBuild > app.currentBuild,
+                            details: platform))
+                        )
+                        return
+                    }
+                    // No Update needed
+                    completion(.success(.init(updateAvailable: false, isOlderThanMinimumVersion: false, details: platform)))
                 }
                 
             case .failure(let error):
