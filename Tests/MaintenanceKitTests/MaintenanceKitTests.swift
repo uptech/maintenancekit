@@ -100,6 +100,46 @@ final class MaintenanceKitTests: XCTestCase {
         XCTAssertEqual(model.maintenance?.message?.body, "Body")
     }
     
+    func testInvalidDateDecoding() throws {
+        let malformedMaintenanceString = """
+        {
+            "active": true,
+            "offline": true,
+            "scheduled": false,
+            "start_date": "2020-03-27 11:49:01+0000",
+            "end_date": "2020-03-27 11:49:01",
+            "message": null
+        }
+        """.data(using: .utf8)!
+        let model = try self.decoder.decode(Maintenance.self, from: malformedMaintenanceString)
+        XCTAssertEqual(model.isActive, true)
+        XCTAssertEqual(model.isOffline, true)
+        XCTAssertEqual(model.isScheduled, false)
+        XCTAssertEqual(model.startDate, nil)
+        XCTAssertEqual(model.endDate, nil)
+        XCTAssertEqual(model.message, nil)
+    }
+    
+    func testNilDateDecoding() throws {
+        let malformedMaintenanceString = """
+        {
+            "active": true,
+            "offline": true,
+            "scheduled": false,
+            "start_date": null,
+            "end_date": null,
+            "message": null
+        }
+        """.data(using: .utf8)!
+        let model = try self.decoder.decode(Maintenance.self, from: malformedMaintenanceString)
+        XCTAssertEqual(model.isActive, true)
+        XCTAssertEqual(model.isOffline, true)
+        XCTAssertEqual(model.isScheduled, false)
+        XCTAssertEqual(model.startDate, nil)
+        XCTAssertEqual(model.endDate, nil)
+        XCTAssertEqual(model.message, nil)
+    }
+    
     func testVersionChecking() {
         let version1 = Version(from: "2.3.4")
         let version2 = Version(from: "2.3.3")
@@ -128,6 +168,8 @@ final class MaintenanceKitTests: XCTestCase {
         ("testMaintenanceDecoding", testMaintenanceDecoding),
         ("testPlatformDecoding", testPlatformDecoding),
         ("testModeDecoding", testModeDecoding),
+        ("testInvalidDateDecoding", testInvalidDateDecoding),
+        ("testNilDateDecoding", testNilDateDecoding),
         ("testVersionChecking", testVersionChecking)
     ]
 }
